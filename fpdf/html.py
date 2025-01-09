@@ -8,6 +8,7 @@ __license__ = "LGPL 3.0"
 
 # Inspired by tuto5.py and several examples from fpdf.org, html2fpdf, etc.
 
+import html
 from .fpdf import FPDF
 from .py3k import PY3K, basestring, unicode, HTMLParser
 
@@ -398,6 +399,7 @@ class HTMLMixin(object):
         "Parse HTML and convert it to PDF"
         h2p = HTML2FPDF(self, image_map)
         # unescape() not supported and not required as of python 3.9 onwards
-        # text = h2p.unescape(text) # To deal with HTML entities
+        # Instead We'll be using html.unescape
+        text = html.unescape(text)  # To deal with HTML entities
         h2p.feed(text)
 
